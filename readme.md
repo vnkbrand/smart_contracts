@@ -90,3 +90,30 @@ DEPLOYING A SMART CONTRACT USING THE REMIX IDE
 6. To interact with the smart contract, we'll use the smart contract address, ABI definition, and the function hashes.
 
 <!-- WEEK 2 - SOLIDITY -->
+Solidiy - It is specially designed to write smart contracts and to target the Ethereum Virtual Machine.
+
+Smart contracts are like classes in OOP
+
+SMART CONTRACT STRUCTURE
+
+1. Data or state variables
+
+2. Functions - Constructor (default or specified - ONLY ONE), Fallback function, View functions, Pure functions, Public functions, Private, Internal, External
+
+3. User defined types in struct and enums
+
+4. Events
+
+FUNCTION DEFINITIONS
+
+1. Function header, followed by the function code in {}
+
+Function header can be as simple as an anonymous noname function to a complex function header loaded with a lot of details.
+- function is key word
+- parameters - any number of pairs type identifier
+
+Function code contains the local data and statements to process the data and return the results of processing.
+
+Any number of values can be returned, unlike common programming languages that allow only one return value. For example, multiple variables, age and gender, can be assigned return values from a function getAgeGender.
+
+In summary, a smart contract for Ethereum can be specified using Solidity defined structure and functions. A variety of function types are provided for expressing smart contract operations. A smart contract in Solidity can inherit its attribute and functionality from another smart contract.
