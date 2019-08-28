@@ -117,3 +117,142 @@ Function code contains the local data and statements to process the data and ret
 Any number of values can be returned, unlike common programming languages that allow only one return value. For example, multiple variables, age and gender, can be assigned return values from a function getAgeGender.
 
 In summary, a smart contract for Ethereum can be specified using Solidity defined structure and functions. A variety of function types are provided for expressing smart contract operations. A smart contract in Solidity can inherit its attribute and functionality from another smart contract.
+
+DATA TYPES AND STATEMENTS
+
+1. Default modifier is private. You explicitly state the public modifier.
+2. For every data declared public, accessor or getter function is automatically provided.
+
+SPECIFIED DATA TYPES
+
+Address
+1. Address is a special Solidity define composite data type. It can hold a 20-byte ethereum address. Recall address is a reference address to access a smart contract.
+2. Address data structure also contains the balance of the account in Wei. It also supports a function transfer, to transfer a value to a specific address.
+
+Mapping
+1. Mapping is a very versatile data structure that is similar to a key value store, it also can be thought of as a hash table.
+2. The key is typically a secure hash of a simple Solidity data type such as address and the value in key-value pair can be any arbitrary type.
+
+Message
+1. Message is a complex data type specific to smart contract. It represents the call that can be used to invoke a function of a smart contract.
+2. msg.sender that holds the address of the sender
+3. msg.value that has the value in Wei sent by the sender. 
+
+DATA STRUCTURES
+The smart contract creator is the chairperson who gets a weight of two for her vote.
+
+Others get a weightage of one for their one vote. 
+***
+"Voting"
+Each voter has to be registered first by the chairperson before they can vote and can vote only once. A constant function is included to enable the client applications to call to obtain the result. The constant modifier of the function prevents it from changing any state of the smart contract. This call comes directly to the smart contract not via a transaction, so it is not recorded in the blockchain. It does not change state of contract, thus no need.
+***
+"Struct"
+Struct is a composite data type of a group of related data that can be referenced by a single, meaningful, collective name.
+Individual elements of the struct can be accessed using the dot notation.
+Voter struct is used to define a mapping of address.
+We could also add another data to the struct, say proposal name that is of string type. Set of proposals is represented by an array of proposals.
+***
+"Time units" - TIME IT WAS CONFIRMED!
+In a blockchain application, all the participants and nodes have to synchronize to one universal time. For this purpose, blockchain proposals include a time server that serves the Unix Epoch time or time since January 1st 1970 in seconds.
+
+This time is used in timestamping the block time. When a block is added to the blockchain, all the transaction confirmed by the block also have the same block time as their confirmation time.
+
+A variable called "Now" defined by solidity, returns the block timestamp. This variable is often used for evaluating time related conditions.
+****
+
+"Enum"
+Enum or enumerator data type, allows for user defined data types with limited set of meaningful values. It is mostly used for internal use and are not supported currently at the ABI level of solidity.
+
+However, it serves an important purpose of defining states or phases of a smart contract.
+
+ACCESS MODIFIERS AND APPLICATIONS
+
+The main intent of smart contract transaction is to execute a function. 
+
+However, smart contracts often require control over who are what can execute the function, at what time a function needs to be executed, what are the precondition to be met before getting access to the function?
+
+Modifiers can change the behavior of a function. It is also known as a function modifier since it is specified at the entry to a function and executed before the execution of the function begins.
+
+<!-- WEEK 3 -->
+
+DEVELOPING SMART CONTRACTS
+1. Define the Problem Statement
+2. Analyze the problem
+3. Use class diagram to represent design
+4. Define the visibility for the state variables & functions
+5. Define the access modifiers for the functions
+6. Define validation for input variables of the functions
+7. Define conditions that must hold true on completion of critical operations within functions
+8. Declaratively express the conditions that were discovered in steps four to seven using access modifiers
+9. Visibility modifiers require an assert classes
+
+VALIDATION & TESTS
+
+Solidity features a function revert that results in state-reverting exception. This exception handling will undo all the changes made to the state in the current call and reverses the transaction and also flags an error to the caller.
+
+CLIENT APPLICATIONS
+
+1. Events
+A generic format is, event, name of the event, and parameters. For example, event votingCompleted.
+
+Typically, an event feature is to indicate to a client application, user interface or a transaction monitor that a significant milestone has been reached. The application can listen to the events pushed, using a listener code, to track transactions, to receive results through parameters of the event, initiate a pull request to receive information from the smart contract.
+
+
+<!-- WEEK 4 -->
+Evaluating Smart Contracts
+- Ensure a blockchain is relevant
+
+- Most suitable for apps with:
+1. Decentralied problems without intermediaries
+2. Require validation, verification, recording of timestamped, immutable ledger
+3. Autonomous ops guided by automatic rules and policies.
+4. Visible to all participants on chain and executed on all full nodes
+5. Need when you need consensus on all aspects
+6. Not for single node computation
+
+Designing Smart Contracts (I)
+1. Keep simple - avoid errors
+2. Variables to address problems - no redundancy
+3. Make it auditable by making custom modifiers
+4. Keep necessary data - BC is not for large data
+5. Good practice to analyse app data and seperate to on and off-chain data (managed by higher-level apps)
+
+Designing Smart Contracts (II)
+1. Use appropriate data types, understand that Ethereum Virtual Machine, is a two 56-bit processor optimized for integer computations. (EXAMPLE) Instead of using a variable string name for the proposals, use an integer identification for the proposal.
+
+2. Make sure you use the integer arithmetic for most of your computational needs.
+
+3. All state variables are created as private. Any variable on the block chain is viewable to all, irrespective of the visibility modifier. You have to explicitly state that a variable is public. When a variable is declared public, Solidity compiler automatically creates a getter method to view the value of the variable. Internal to the contract, the variable is accessed as data, externally it is accessed as a function.
+
+4. Maintain a standard order for different function types within a smart contract, according to their visibility as specified in Solidity docs. 
+
+The recommended order for functions within a smart contract are; constructor, fallback function, external, public, internal, private. Within a grouping, plays the constant functions last.
+
+5. Multiple modifiers that apply to a function, by specifying them in a white space separated list and are evaluated in the order presented. Hence, if the output of one modifier depends on the other, make sure you order them in the right sequence. For example, function buy, has three modifiers specified in the following order; payable, enoughMoney, item available.
+
+6. Use modifier declarations for implementing rules. 
+
+Use function access modifiers for; implementing rules, policies and regulations. 
+
+Implementing common rules for all who may access a function, declaratively validating application specific conditions and providing auditable elements to allow verification of the correctness of a smart contract.
+
+7. Events
+
+Using events in smart contract. Use events to log important milestones, during the span of a smart contract execution especially long running ones.
+
+Events can carry at most three index parameters that can be used efficiently for searching through the events in the block chain. 
+
+8. NOW
+
+Beware of "now" time variable. Now is the alias for block timestamp of the block indicating the universal time when the block and the transaction within it are mined and recorded. Variable now can be used for approximate elapsed time comparison, as we illustrated in the ballot example. However, it is not a good practice to use it for computation within the application logic.
+
+9. Hashing
+
+Use secure hashing for protecting data. Recall that hashing is a very important function in a block chain. Data in the block chain is viewable by all. This means that we may want to secure hash, to protect its visibility. Solidity provides a variety of built-in functions for standard secure hash functions. Keccak, SHA-256, RIPEMD-160 are Solidity functions available to use for hashing application data.
+
+End of Course - Addendum
+Some of the changes in the newer version of Solidity are in the syntax of the constructor and the event feature. Please
+
+Keep the constructor to be “function Auction” instead of newer version “constructor”
+Call an event by its name (say, eventName) rather than “emit eventName” of the newer version of Solidity. It is not difficult to move to the newer version after you complete the course projects with version 0.4.17. You just have to pay attention to the errors and read the documentation.
+
