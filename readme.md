@@ -1,3 +1,28 @@
+Project: Design and Develop a Smart Contract
+Coursera - This is the 2nd course of the Coursera Blockchain Specialization Certificate. 
+
+Project Description
+
+Solidity Version Mandatory Reading
+
+How to run?
+Pre-requisites
+Remix IDE
+Web Browser
+Desktop Application (Electron)
+Passion for Next level of World Wide Web and its bright future ;)
+Run
+Open Remix IDE
+copy code from Auction.sol
+Compile and deploy
+Done - You should be able to interact with the Smart Contract registering bidders, placing bids and revealing winners
+Technology Stack
+This project uses the following technologies:
+
+Solidity v0.4.17
+
+COURSE NOTES:
+
 <!-- Smart Contract Basics -->
 
 <!-- Week 1 -->
